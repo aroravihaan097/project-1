@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vihaan Arora | Skills</title>
+    <link rel="stylesheet" href="global.css">
+    <style>
+        h2 { margin-bottom: 10px; }
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; margin-top: 20px; }
+        .skill-card { background: rgba(255, 255, 255, 0.03); border: 1px solid var(--glass-border); padding: 35px 20px; text-align: center; border-radius: 16px; cursor: pointer; font-weight: bold; font-size: 1.2rem; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; overflow: hidden; }
+        .skill-card::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent); transition: 0.5s; }
+        .skill-card:hover::before { left: 100%; }
+        .skill-card:hover { background: rgba(107, 76, 255, 0.15); transform: translateY(-10px) scale(1.05); box-shadow: var(--neon-glow); border-color: var(--accent); }
+    </style>
+</head>
+<body>
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    
+    <div class="bg-texts">
+        <span>Phil's-osophy • 11 Trophies & Counting • RGB Adds 10 FPS</span>
+        <span>Pushing Rank in Valorant • BOY! • Midfield Maestro • BITS Pilani</span>
+    </div>
+
+    <nav>
+        <div class="nav-brand">Vihaan Arora</div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-btn">Home</a>
+            <a href="journey.html" class="nav-btn">My Journey</a>
+            <a href="skills.html" class="nav-btn active">Skills</a>
+            <a href="remarks.html" class="nav-btn">Remarks</a>
+        </div>
+    </nav>
+    <main>
+        <div class="glass-container">
+            <h2>My Skills</h2>
+            <p style="margin-bottom: 20px; color: #ccc;">Select a skill to unlock the details.</p>
+            <div class="skills-grid">
+                <div class="skill-card" data-skill="football">⚽ Football</div>
+                <div class="skill-card" data-skill="analytical">🧠 Analytical Problem Solving</div>
+                <div class="skill-card" data-skill="leadership">👑 Leadership</div>
+                <div class="skill-card" data-skill="java">☕ Java</div>
+                <div class="skill-card" data-skill="linux">🐧 Linux</div>
+            </div>
+        </div>
+    </main>
+    <script>
+        document.querySelectorAll('.skill-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const skillId = card.getAttribute('data-skill');
+                window.location.href = `skill-detail.html?skill=${skillId}`;
+            });
+        });
+    </script>
+</body>
+</html>

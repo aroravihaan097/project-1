@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vihaan Arora | Remarks</title>
+    <link rel="stylesheet" href="global.css">
+    <style>
+        #remark-form { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
+        input, textarea { background: rgba(0, 0, 0, 0.4); border: 1px solid var(--glass-border); color: white; padding: 15px; border-radius: 8px; outline: none; font-size: 1rem; transition: 0.3s; }
+        input:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 10px rgba(107, 76, 255, 0.3); }
+        .primary-btn { background: var(--accent); color: white; border: none; padding: 15px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 1.1rem; transition: 0.3s; }
+        .primary-btn:hover { background: #5033d6; box-shadow: var(--neon-glow); }
+        
+        .remarks-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 25px; margin-top: 30px; }
+        
+        /* Pastel Sticky Notes */
+        .sticky-note { padding: 25px; border-radius: 2px 20px 20px 20px; box-shadow: 4px 6px 15px rgba(0,0,0,0.4); position: relative; transition: 0.3s; color: #222; }
+        .sticky-note:hover { transform: scale(1.05) rotate(0deg) !important; z-index: 10; box-shadow: 8px 12px 20px rgba(0,0,0,0.5); }
+        
+        .sticky-note:nth-child(4n+1) { background-color: #ffb7b2; transform: rotate(-3deg); }
+        .sticky-note:nth-child(4n+2) { background-color: #e2f0cb; transform: rotate(2deg); }
+        .sticky-note:nth-child(4n+3) { background-color: #ffdac1; transform: rotate(-1deg); }
+        .sticky-note:nth-child(4n+4) { background-color: #c7ceea; transform: rotate(3deg); }
+        
+        .sticky-note h4 { font-size: 1rem; margin-bottom: 12px; border-bottom: 2px solid rgba(0,0,0,0.1); padding-bottom: 8px; }
+        .sticky-note p { font-size: 1.1rem; font-family: 'Comic Sans MS', cursive, sans-serif; line-height: 1.4; }
+    </style>
+</head>
+<body>
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <nav>
+        <div class="nav-brand">Vihaan Arora</div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-btn">Home</a>
+            <a href="journey.html" class="nav-btn">My Journey</a>
+            <a href="skills.html" class="nav-btn">Skills</a>
+            <a href="remarks.html" class="nav-btn active">Remarks</a>
+        </div>
+    </nav>
+    <main>
+        <div class="glass-container">
+            <h2>Leave a Remark</h2>
+            <form id="remark-form">
+                <input type="text" id="remark-name" placeholder="Your Name" required>
+                <textarea id="remark-text" placeholder="What do you think of me as a person?" rows="3" required></textarea>
+                <button type="submit" class="primary-btn">Post Remark</button>
+            </form>
+            
+            <h3 style="margin-top: 50px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px;">Wall of Remarks</h3>
+            <div id="remarks-wall" class="remarks-grid"></div>
+        </div>
+    </main>
+    <script type="module" src="remarks.js"></script>
+    <script src="popups.js"></script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vihaan Arora | Skill Detail</title>
+    <link rel="stylesheet" href="global.css">
+    <style>
+        .primary-btn { background: rgba(107, 76, 255, 0.2); border: 1px solid var(--accent); color: white; padding: 10px 20px; border-radius: 8px; cursor: pointer; text-decoration: none; display: inline-block; margin-bottom: 30px; transition: 0.3s; font-weight: bold; }
+        .primary-btn:hover { background: var(--accent); box-shadow: var(--neon-glow); transform: translateX(-5px); }
+        h2 { font-size: 2.5rem; margin-bottom: 20px; color: #fff; }
+        .skill-content h3 { color: #a390ff; margin: 25px 0 10px 0; font-size: 1.3rem; }
+        .skill-content p { color: #ccc; line-height: 1.8; font-size: 1.1rem; }
+    </style>
+</head>
+<body>
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <nav>
+        <div class="nav-brand">Vihaan Arora</div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-btn">Home</a>
+            <a href="journey.html" class="nav-btn">My Journey</a>
+            <a href="skills.html" class="nav-btn active">Skills</a>
+            <a href="remarks.html" class="nav-btn">Remarks</a>
+        </div>
+    </nav>
+    <main>
+        <div class="glass-container">
+            <a href="skills.html" class="primary-btn">← Back to Skills</a>
+            <h2 id="skill-title">Loading...</h2>
+            <div id="skill-description" class="skill-content"></div>
+        </div>
+    </main>
+    <script>
+        const skillData = {
+            football: { title: "⚽ Football", description: "My primary passion outside of academics. Over the years, I have developed strong physical endurance, tactical awareness, and teamwork skills on the pitch.", experience: "I have won 11 individual trophies, 28 medals, and contributed to winning 7 team trophies. I continuously strive to improve my game and coordinate plays efficiently with my teammates." },
+            analytical: { title: "🧠 Analytical Problem Solving", description: "I approach challenges logically, breaking down complex issues into manageable parts to find optimized solutions.", experience: "Applied extensively in my Computer Science studies, algorithmic challenges, and when debugging code for my projects." },
+            leadership: { title: "👑 Leadership", description: "Guiding teams towards a unified goal by fostering communication, delegating tasks effectively, and maintaining morale.", experience: "Captained sports teams to multiple tournament victories and led group academic projects ensuring everyone contributes their best." },
+            java: { title: "☕ Java", description: "Object-oriented programming using Java. Focused on writing clean, scalable, and efficient code.", experience: "Studied and utilized as part of my core curriculum in my Computer Science and AI degrees, building foundational software applications." },
+            linux: { title: "🐧 Linux", description: "Proficiency in navigating and managing Linux-based operating systems, utilizing the command line for system administration and development.", experience: "Used for managing development environments, executing scripts, and understanding core OS concepts." }
+        };
+        const urlParams = new URLSearchParams(window.location.search);
+        const skillKey = urlParams.get('skill');
+        if (skillKey && skillData[skillKey]) {
+            const data = skillData[skillKey];
+            document.getElementById('skill-title').innerText = data.title;
+            document.getElementById('skill-description').innerHTML = `<h3>Overview</h3><p>${data.description}</p><h3>Experience</h3><p>${data.experience}</p>`;
+        } else {
+            document.getElementById('skill-title').innerText = "Skill not found";
+            document.getElementById('skill-description').innerText = "Please return to the skills hub and select a valid skill.";
+        }
+    </script>
+</body>
+</html>

@@ -2,12 +2,13 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebas
 import { getFirestore, collection, addDoc, getDocs, orderBy, query } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT_ID.appspot.com",
-    messagingSenderId: "YOUR_SENDER_ID",
-    appId: "YOUR_APP_ID"
+     apiKey: "AIzaSyAyZcE6gMxga09oQ9HYOqJpJrYSwt5lkl8",
+  authDomain: "vihaan-portfolio-28673.firebaseapp.com",
+  projectId: "vihaan-portfolio-28673",
+  storageBucket: "vihaan-portfolio-28673.firebasestorage.app",
+  messagingSenderId: "844839623259",
+  appId: "1:844839623259:web:57fa76a45d19c2c9e7fd7e",
+  measurementId: "G-V7M9GFWP08"
 };
 
 let db;

@@ -1,4 +1,4 @@
-// List of 12 Vibe Pop-ups matching Vihaan's personality
+// popups.js - Complete & Optimized
 const vibePopups = [
     { text: "🚨 Warning: Too much football talent detected!", position: "bottom" },
     { text: "🎮 Hold on, let me finish this Valorant match...", position: "top" },
@@ -27,16 +27,16 @@ function showDirectionalToast() {
     // Trigger smooth slide-in
     setTimeout(() => toast.classList.add('show'), 100);
     
-    // Remove after 4 seconds
+    // Remove after 4.5 seconds
     setTimeout(() => {
         toast.classList.remove('show');
         setTimeout(() => toast.remove(), 500);
     }, 4500);
 }
 
-// Schedule them at different intervals while browsing
-setTimeout(showDirectionalToast, 3000);   // 3s
-setTimeout(showDirectionalToast, 10000);  // 10s
-setTimeout(showDirectionalToast, 18000);  // 18s
-setTimeout(showDirectionalToast, 27000);  // 27s
-setTimeout(showDirectionalToast, 36000);  // 36s
+// Schedule them at smooth intervals while browsing
+setTimeout(showDirectionalToast, 3000);   // After 3s
+setTimeout(showDirectionalToast, 11000);  // After 11s
+setTimeout(showDirectionalToast, 20000);  // After 20s
+setTimeout(showDirectionalToast, 30000);  // After 30s
+setTimeout(showDirectionalToast, 42000);  // After 42s

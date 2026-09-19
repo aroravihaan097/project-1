@@ -1,4 +1,4 @@
-/* global.css - Complete & Optimized */
+/* global.css - Complete & Optimized with Perfect Vertical Centering */
 :root {
     --bg-color: #0d0d12;
     --text-color: #f1f1f1;
@@ -46,7 +46,7 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
 main { padding: 20px; max-width: 900px; margin: 0 auto; width: 100%; }
 .glass-container { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 16px; padding: 25px; backdrop-filter: blur(12px); margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 
-/* Multi-directional Toast Notifications (Fixed for Laptop View) */
+/* Multi-directional Toast Notifications (Vertically Centered Left/Right) */
 .toast {
     position: fixed;
     background: rgba(13, 13, 18, 0.95);
@@ -58,7 +58,7 @@ main { padding: 20px; max-width: 900px; margin: 0 auto; width: 100%; }
     box-shadow: var(--neon-glow);
     z-index: 1000;
     font-size: 0.95rem;
-    max-width: 360px;
+    max-width: 320px;
     width: max-content;
     transition: 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -71,13 +71,13 @@ main { padding: 20px; max-width: 900px; margin: 0 auto; width: 100%; }
 .toast-top { top: -100px; left: 50%; transform: translateX(-50%); }
 .toast-top.show { top: 30px; transform: translateX(-50%); }
 
-/* Left Entrance (Laptop: true bottom-left corner) */
-.toast-left { left: -400px; bottom: 30px; }
-.toast-left.show { left: 30px; bottom: 30px; }
+/* Left Entrance (Vertically Centered on Left Side) */
+.toast-left { left: -400px; top: 50%; transform: translateY(-50%); }
+.toast-left.show { left: 30px; transform: translateY(-50%); }
 
-/* Right Entrance (Laptop: true bottom-right corner) */
-.toast-right { right: -400px; bottom: 30px; }
-.toast-right.show { right: 30px; bottom: 30px; }
+/* Right Entrance (Vertically Centered on Right Side) */
+.toast-right { right: -400px; top: 50%; transform: translateY(-50%); }
+.toast-right.show { right: 30px; transform: translateY(-50%); }
 
 /* Mobile Optimizations */
 @media (max-width: 768px) {
@@ -87,16 +87,18 @@ main { padding: 20px; max-width: 900px; margin: 0 auto; width: 100%; }
     .glass-container { padding: 20px; }
     main { padding: 10px; }
 
-    /* For smaller screens, center the side popups so they don't clip off screen */
+    /* On mobile, force left/right popups to slide from bottom smoothly to prevent screen cutting */
     .toast-left, .toast-right { 
         left: 50% !important; 
         right: auto !important; 
+        top: auto !important;
         transform: translateX(-50%); 
         bottom: -100px;
     }
     .toast-left.show, .toast-right.show { 
         left: 50% !important; 
         right: auto !important; 
+        top: auto !important;
         transform: translateX(-50%); 
         bottom: 30px; 
     }

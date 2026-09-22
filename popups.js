@@ -1,4 +1,3 @@
-// popups.js - Complete & Optimized
 const vibePopups = [
     { text: "🚨 Warning: Too much football talent detected!", position: "bottom" },
     { text: "🎮 Hold on, let me finish this Valorant match...", position: "top" },
@@ -7,34 +6,58 @@ const vibePopups = [
     { text: "⚡ Powered by caffeine, BITS Pilani stress, and pure CSS.", position: "bottom" },
     { text: "🏆 Warning: Unbeaten in FIFA (source: trust me bro).", position: "top" },
     { text: "☕ Java code compiling? Or just a pre-workout kicking in?", position: "left" },
-    { text: "🐧 Linux terminal open means serious business.", position: "right" },
-    { text: "👑 Leadership material: Captain on the pitch, leader in the group project.", position: "bottom" },
-    { text: "🧠 Analytical problem solving = figuring out why the code broke at 3 AM.", position: "top" },
-    { text: "🔥 Maxfort Rohini alumni in the building!", position: "left" },
-    { text: "💤 SST & BITS dual degree grind never stops.", position: "right" }
+    { text: "🐧 Linux terminal open means serious business.", position: "right" }
 ];
 
-// Function to trigger a random directional pop-up
 function showDirectionalToast() {
-    // Pick a random popup object from the array
     const popupObj = vibePopups[Math.floor(Math.random() * vibePopups.length)];
-    
     const toast = document.createElement('div');
     toast.className = `toast toast-${popupObj.position}`;
     toast.innerHTML = popupObj.text;
     document.body.appendChild(toast);
     
-    // Trigger smooth slide-in
     setTimeout(() => toast.classList.add('show'), 100);
-    
-    // Remove after 4.5 seconds
-    setTimeout(() => {
-        toast.classList.remove('show');
-        setTimeout(() => toast.remove(), 500);
-    }, 4500);
+    setTimeout(() => { toast.classList.remove('show'); setTimeout(() => toast.remove(), 500); }, 4500);
 }
 
-// Schedule them at smooth intervals while browsing
+window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(showDirectionalToast, 4000);   
+    setTimeout(showDirectionalToast, 15000);  
+    setTimeout(showDirectionalToast, 30000);  
+});
+
+// SECRET EASTER EGG (SYDNEY SWEENEY MODE)
+let secretBuffer = '';
+const secretCode = 'sydney';
+
+window.addEventListener('keydown', (e) => {
+    secretBuffer += e.key.toLowerCase();
+    if (secretBuffer.length > 10) secretBuffer = secretBuffer.slice(-10);
+    
+    if (secretBuffer.includes(secretCode)) {
+        activateSecretMode();
+        secretBuffer = '';
+    }
+});
+
+function activateSecretMode() {
+    const toast = document.createElement('div');
+    toast.className = 'toast toast-top show';
+    toast.style.background = 'rgba(255, 20, 147, 0.9)';
+    toast.style.borderColor = '#ff69b4';
+    toast.style.boxShadow = '0 0 25px rgba(255, 105, 180, 0.8)';
+    toast.innerHTML = "✨ Sydney Sweeney mode activated. You found the secret!";
+    document.body.appendChild(toast);
+    
+    document.body.style.transition = 'box-shadow 1s ease-in-out';
+    document.body.style.boxShadow = 'inset 0 0 150px rgba(255, 105, 180, 0.2)';
+    
+    setTimeout(() => {
+        toast.classList.remove('show');
+        document.body.style.boxShadow = 'none';
+        setTimeout(() => toast.remove(), 500);
+    }, 5000);
+}// Schedule them at smooth intervals while browsing
 setTimeout(showDirectionalToast, 3000);   // After 3s
 setTimeout(showDirectionalToast, 11000);  // After 11s
 setTimeout(showDirectionalToast, 20000);  // After 20s

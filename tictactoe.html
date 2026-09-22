@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8-Bit Tic Tac Toe | Vihaan</title>
+    <link rel="stylesheet" href="global.css">
+    <style>
+        .board { display: grid; grid-template-columns: repeat(3, 100px); gap: 5px; margin: 20px auto; width: max-content; }
+        .cell { width: 100px; height: 100px; background: rgba(255,255,255,0.05); border: 2px solid var(--accent); display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: bold; cursor: pointer; color: white; transition: 0.2s; }
+        .cell:hover { background: rgba(255,255,255,0.1); box-shadow: var(--neon-glow); }
+        .code-box { background: #1e1e1e; padding: 15px; border-radius: 8px; overflow-x: auto; font-family: monospace; color: #d4d4d4; font-size: 0.85rem; border: 1px solid var(--glass-border); margin-top: 20px; }
+    </style>
+</head>
+<body data-theme="grind">
+    <nav>
+        <div class="nav-brand">Vihaan.arora()</div>
+        <div class="nav-links"><a href="index.html" class="nav-btn">⬅ Back to Home</a></div>
+    </nav>
+    <main>
+        <section class="glass-container" style="text-align: center;">
+            <h2>🕹️ 8-Bit Tic Tac Toe</h2>
+            <p style="opacity: 0.8; margin-bottom: 20px;">Play the game below. Pure HTML/CSS/JS.</p>
+            
+            <div class="board" id="board">
+                <div class="cell" onclick="makeMove(this, 0)"></div><div class="cell" onclick="makeMove(this, 1)"></div><div class="cell" onclick="makeMove(this, 2)"></div>
+                <div class="cell" onclick="makeMove(this, 3)"></div><div class="cell" onclick="makeMove(this, 4)"></div><div class="cell" onclick="makeMove(this, 5)"></div>
+                <div class="cell" onclick="makeMove(this, 6)"></div><div class="cell" onclick="makeMove(this, 7)"></div><div class="cell" onclick="makeMove(this, 8)"></div>
+            </div>
+            <button onclick="resetGame()" class="nav-btn" style="background: var(--accent); padding: 8px 16px; border-radius: 8px; border: none; margin-top: 10px; cursor: pointer; font-weight: bold;">Reset Game</button>
+        </section>
+
+        <section class="glass-container">
+            <h2>💻 Source Code Behind This</h2>
+            <p style="opacity: 0.8;">Written cleanly without any heavy frameworks.</p>
+            <div class="code-box">
+<pre><code>let boardState = ["", "", "", "", "", "", "", "", ""];
+let currentPlayer = "X";
+
+function makeMove(cell, index) {
+    if (boardState[index] !== "") return;
+    boardState[index] = currentPlayer;
+    cell.innerText = currentPlayer;
+    cell.style.color = currentPlayer === "X" ? "var(--accent)" : "#fff";
+    
+    checkWin();
+    currentPlayer = currentPlayer === "X" ? "O" : "X";
+}</code></pre>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        let boardState = ["", "", "", "", "", "", "", "", ""];
+        let currentPlayer = "X";
+        function makeMove(cell, index) {
+            if (boardState[index] !== "") return;
+            boardState[index] = currentPlayer;
+            cell.innerText = currentPlayer;
+            cell.style.color = currentPlayer === "X" ? "var(--accent)" : "#fff";
+            currentPlayer = currentPlayer === "X" ? "O" : "X";
+        }
+        function resetGame() {
+            boardState = ["", "", "", "", "", "", "", "", ""];
+            currentPlayer = "X";
+            document.querySelectorAll('.cell').forEach(c => c.innerText = "");
+        }
+    </script>
+</body>
+</html>

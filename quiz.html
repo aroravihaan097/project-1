@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vihaan's MCQ Quiz & Leaderboard</title>
+    <link rel="stylesheet" href="global.css">
+    <style>
+        .quiz-wrapper { display: grid; grid-template-columns: 2fr 1fr; gap: 25px; margin-top: 20px; }
+        @media(max-width: 900px) { .quiz-wrapper { grid-template-columns: 1fr; } }
+        
+        .question-card { background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); padding: 20px; border-radius: 12px; margin-bottom: 20px; }
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
+        @media(max-width: 600px) { .options-grid { grid-template-columns: 1fr; } }
+        
+        .option-btn { background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); padding: 12px; border-radius: 8px; color: var(--text-color); cursor: pointer; text-align: left; transition: 0.2s; font-size: 0.9rem; }
+        .option-btn:hover { border-color: var(--accent); background: rgba(255,255,255,0.1); }
+        .option-btn.selected { background: var(--accent); border-color: var(--accent); font-weight: bold; box-shadow: var(--neon-glow); }
+        
+        .leaderboard-box { background: rgba(10,10,15,0.8); border: 1px solid var(--glass-border); padding: 20px; border-radius: 12px; height: fit-content; }
+        .lb-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.9rem; }
+        
+        .submit-quiz { background: var(--accent); color: white; border: none; padding: 12px 24px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1rem; width: 100%; box-shadow: var(--neon-glow); margin-top: 10px; }
+    </style>
+</head>
+<body data-theme="grind">
+    <nav>
+        <div class="nav-brand">Vihaan.arora()</div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-btn">Home</a>
+            <a href="quiz.html" class="nav-btn active" style="color: var(--accent); font-weight: bold;">🧠 MCQ Quiz</a>
+            <a href="remarks.html" class="nav-btn">Remarks Wall</a>
+        </div>
+    </nav>
+
+    <main style="max-width: 1100px;">
+        <section class="glass-container">
+            <h2>🧠 The Ultimate Vihaan MCQ Challenge</h2>
+            <p style="opacity: 0.8; font-size: 0.9rem; margin-top: 5px;">Test your knowledge with these multiple-choice questions and lock your rank on the leaderboard!</p>
+
+            <div class="quiz-wrapper">
+                <!-- Quiz Area -->
+                <div id="quiz-container">
+                    <!-- Dynamic MCQs will load here -->
+                </div>
+
+                <!-- Leaderboard Area -->
+                <div class="leaderboard-box">
+                    <h3 style="margin-bottom: 15px; color: var(--accent);">🏆 Live Leaderboard</h3>
+                    <div id="leaderboard-list">
+                        <p style="opacity: 0.6; font-size: 0.85rem;">No scores yet. Be the first!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const questions = [
+            { q: "1. What is Vihaan's exact birth date?", options: ["January 15, 2007", "June 4, 2008", "November 21, 2008", "August 12, 2007"], correct: 1 },
+            { q: "2. Which school's alumni is Vihaan from?", options: ["Modern School Barakhamba", "Maxfort School Rohini", "DPS Dwarka", "Sanskriti School"], correct: 1 },
+            { q: "3. How many total football trophies does Vihaan proudly have?", options: ["7", "9", "11", "15"], correct: 2 },
+            { q: "4. What is the secret keyboard easter egg on his portfolio?", options: ["messi", "sydney", "bits", "football"], correct: 1 },
+            { q: "5. Which prestigious institutions are tied to Vihaan's dual degree grind?", options: ["IIT Delhi & Bombay", "SST & BITS Pilani", "IIIT Hyderabad & Stanford", "DTU & NSUT"], correct: 1 },
+            { q: "6. What is Vihaan's go-to game when taking a break from code?", options: ["Candy Crush", "FIFA & Valorant", "Minecraft Creative", "Chess.com bullet"], correct: 1 },
+            { q: "7. Which operating system does Vihaan consider the holy grail?", options: ["Windows 11", "macOS", "Linux", "Ubuntu-skinned Windows"], correct: 2 },
+            { q: "8. What language is his core logic written in during late-night sessions?", options: ["Python", "Java", "C++", "Rust"], correct: 1 },
+            { q: "9. What was the topic of his mid-2026 economic analysis document?", options: ["Inflation & Crypto", "PPC & government policies", "Supply chain management", "Stock trading algos"], correct: 1 },
+            { q: "10. What does Vihaan typically do when he feels low or sad?", options: ["Cries and calls everyone", "He just sits quietly and keeps it to himself", "Goes on a rant on social media", "Smashes his keyboard"], correct: 1 }
+        ];
+
+        let userAnswers = {};
+
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            let html = '';
+            
+            questions.forEach((item, qIndex) => {
+                html += `<div class="question-card">
+                    <h4 style="margin-bottom: 10px;">${item.q}</h4>
+                    <div class="options-grid">`;
+                item.options.forEach((opt, oIndex) => {
+                    html += `<button class="option-btn" onclick="selectOption(${qIndex}, ${oIndex}, this)">${opt}</button>`;
+                });
+                html += `</div></div>`;
+            });
+
+            html += `<div style="margin-top: 20px;">
+                <input type="text" id="challenger-name" placeholder="Enter your name for Leaderboard..." style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--glass-border); background: rgba(255,255,255,0.05); color: white; margin-bottom: 10px; outline: none;" required>
+                <button class="submit-quiz" onclick="submitQuiz()">Submit MCQ Answers</button>
+            </div>`;
+
+            container.innerHTML = html;
+        }
+
+        function selectOption(qIdx, oIdx, btn) {
+            userAnswers[qIdx] = oIdx;
+            const parent = btn.parentElement;
+            parent.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+        }
+
+        function submitQuiz() {
+            const nameInput = document.getElementById('challenger-name').value.trim();
+            if(!nameInput) {
+                alert("Please enter your name first!");
+                return;
+            }
+            if(Object.keys(userAnswers).length < questions.length) {
+                alert("Please answer all questions before submitting!");
+                return;
+            }
+
+            let score = 0;
+            questions.forEach((item, idx) => {
+                if(userAnswers[idx] === item.correct) score++;
+            });
+
+            let leaderboard = JSON.parse(localStorage.getItem('vihaan_lb') || '[]');
+            leaderboard.push({ name: nameInput, score: score, total: questions.length });
+            leaderboard.sort((a,b) => b.score - a.score);
+            localStorage.setItem('vihaan_lb', JSON.stringify(leaderboard));
+
+            alert(`Quiz Submitted! Your Score: ${score} / ${questions.length}`);
+            loadLeaderboard();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function loadLeaderboard() {
+            const lbList = document.getElementById('leaderboard-list');
+            let leaderboard = JSON.parse(localStorage.getItem('vihaan_lb') || '[]');
+            
+            if(leaderboard.length === 0) {
+                lbList.innerHTML = `<p style="opacity: 0.6; font-size: 0.85rem;">No scores yet. Be the first!</p>`;
+                return;
+            }
+
+            let html = '';
+            leaderboard.forEach((entry, i) => {
+                html += `<div class="lb-item">
+                    <span>#${i+1} <strong>${entry.name}</strong></span>
+                    <span style="color: var(--accent); font-weight: bold;">${entry.score} / ${entry.total}</span>
+                </div>`;
+            });
+            lbList.innerHTML = html;
+        }
+
+        renderQuiz();
+        loadLeaderboard();
+    </script>
+    <script src="popups.js"></script>
+</body>
+</html>

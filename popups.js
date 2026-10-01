@@ -1,4 +1,4 @@
-// 1. Theme Toggle Logic (Grind vs Chill Mode)
+
 const themeBtn = document.getElementById('theme-toggle');
 if(themeBtn) {
     themeBtn.addEventListener('click', () => {
@@ -15,7 +15,7 @@ if(themeBtn) {
     });
 }
 
-// 2. Secret Sydney Sweeney Easter Egg
+
 let secretBuffer = '';
 const secretCode = 'sydney';
 
